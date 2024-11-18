@@ -12,22 +12,38 @@ function Form(props) {
         height: "auto"
     }
 
+    const inputContainerStyle = {
+        ...props.styles.inputContainer,
+        display: "flex",
+        flexDirection: "column"
+    }
+
     const inputStyle = {
-        display: "block",
-        width: "80%"
+        display: "flex",
+        flexDirection: "column",
+        margin: "0px",
+        padding: "0px"
+    }
+
+    const inputTextStyle = {
+        ...props.styles.inputText,
+        margin: "0",
+        marginBottom: "3px"
     }
 
     return (
         <div style={formStyle}>
             {props.title === null ? null : <p>{props.title}</p>}
-            {props.fields.map((field) => {
-                return (
-                    <div style={inputStyle}>
-                        <p style={props.styles.inputTextStyle}>{field.label}</p>
-                        <input id={field.id} type={field.type} style={props.styles.inputBoxStyle}></input>
-                    </div>
-                );
-            })}
+            <div style={inputContainerStyle}>
+                {props.fields.map((field) => {
+                    return (
+                        <div style={inputStyle}>
+                            {field.label !== null && <p style={inputTextStyle}>{field.label}</p>}
+                            <input id={field.id} type={field.type} placeholder={field.placeholder} style={props.styles.inputBox}></input>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
     
@@ -36,6 +52,7 @@ function Form(props) {
 Form.propTypes = {
     title: PropTypes.string,
     fields: PropTypes.array,
+    onSubmit: PropTypes.func,
     styles: PropTypes.object
 }
 
@@ -44,17 +61,18 @@ Form.defaultProps = {
     fields: [
         {
             id: "usr",
-            label: "Username",
-            placeholder: null,
+            label: "wasup",
+            placeholder: "Username",
             type: "text"
         },
         {
-            id: "pw",
-            label: "Password",
-            placeholder: null,
+            id: "usr",
+            label: "pagong",
+            placeholder: "Password",
             type: "text"
         }
     ],
+    onSubmit: null,
     styles: {
         form: {
             boxShadow: "0px 0px 5px 2px lightgray",
@@ -62,21 +80,23 @@ Form.defaultProps = {
             borderStyle: "solid",
             borderWidth: "1px",
             borderColor: "black",
-            width: "220px",
+            width: "250px",
             fontFamily: "Inter, Consolas",
         },
-        inputBoxStyle: {
+        inputContainer: {
+            width: "80%",
+            gap: "10px"
+        },
+        inputBox: {
             height: "20px",
             borderStyle: "solid",
             borderColor: "black",
             borderWidth: "1px",
             borderRadius: "5px",
-            marginTop: "3px",
-            marginBottom: "5px",
-            width: "100%"
+            width: "97%"
         },
-        inputTextStyle: {
-            textAlign: "left",
+        inputText: {
+            textAlign: "left"
         }
     }
 }

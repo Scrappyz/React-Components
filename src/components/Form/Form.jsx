@@ -2,7 +2,7 @@ import React, { useState, memo } from "react";
 import PropTypes from "prop-types";
 
 // Password Field Component
-const PasswordField = memo(({ field, inputStyle, inputLabelStyle, inputBoxStyle }) => {
+const PasswordField = memo(({ field, inputStyle, inputLabelStyle, inputBoxStyle, checkboxStyle, inputRef }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -21,9 +21,10 @@ const PasswordField = memo(({ field, inputStyle, inputLabelStyle, inputBoxStyle 
                 type={showPassword ? "text" : "password"}
                 placeholder={field.placeholder}
                 style={inputBoxStyle}
+                ref={inputRef}
             />
             {(field.showPasswordText !== null && "showPasswordText" in field) && field.showPasswordText.length  && (
-                <div>
+                <div style={checkboxStyle}>
                     <input type="checkbox" onClick={togglePasswordVisibility} />
                     <label>{field.showPasswordText}</label>
                 </div>
@@ -35,15 +36,24 @@ const PasswordField = memo(({ field, inputStyle, inputLabelStyle, inputBoxStyle 
 // Main Form Component
 function Form(props) {
     const formStyle = {
+        boxShadow: "0px 0px 5px 2px lightgray",
+        backgroundColor: "transparent",
+        borderStyle: "solid",
+        borderWidth: "1px",
+        borderColor: "black",
+        width: "250px",
+        fontFamily: "Inter, Consolas",
         ...props.styles.form,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "auto",
+        height: "auto"
     };
 
     const inputContainerStyle = {
+        width: "80%",
+        gap: "10px",
         ...props.styles.inputContainer,
         display: "flex",
         flexDirection: "column",
@@ -57,15 +67,65 @@ function Form(props) {
     };
 
     const inputLabelStyle = {
+        textAlign: "left",
         ...props.styles.inputLabel,
         margin: "0",
         marginBottom: "3px",
     };
 
     const inputBoxStyle = {
-        ...props.styles.inputBox,
+        borderStyle: "solid",
+        borderColor: "black",
+        borderWidth: "1px",
+        borderRadius: "5px",
         height: "20px",
+        ...props.styles.inputBox,
         width: "97%"
+    }
+
+    const checkboxStyle = {
+        fontSize: "14px",
+        ...props.styles.checkbox,
+        display: "flex",
+        flexDirection: "row"
+    }
+
+    const submitButtonContainerStyle = {
+        width: "80%",
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "10px",
+        ...props.styles.submitButtonContainer
+    }
+
+    const submitButtonStyle = {
+        backgroundColor: "transparent",
+        borderWidth: "1px",
+        borderColor: "black",
+        width: "100%",
+        borderRadius: "5px",
+        ...props.styles.submitButton
+    }
+
+    const extraStyle = {
+        textAlign: "center",
+        width: "80%",
+        ...props.styles.extra
+    }
+
+    const inputRefs = {};
+
+    const handleSubmit = () => {
+
+        const inputValues = {};
+        props.fields.forEach((field) => {
+            const input = inputRefs[field.id];
+            if(input) {
+                inputValues[field.id] = input.value;
+            }
+        });
+
+        props.submitButton.onSubmit(inputValues);
     }
 
     return (
@@ -80,6 +140,8 @@ function Form(props) {
                             inputStyle={inputStyle}
                             inputLabelStyle={inputLabelStyle}
                             inputBoxStyle={inputBoxStyle}
+                            checkboxStyle={checkboxStyle}
+                            inputRef={(el) => (inputRefs[field.id] = el)}
                         />
                     ) : (
                         <div style={inputStyle} key={field.id}>
@@ -93,15 +155,16 @@ function Form(props) {
                                 type={field.type}
                                 placeholder={field.placeholder}
                                 style={inputBoxStyle}
+                                ref={(el) => (inputRefs[field.id] = el)}
                             />
                         </div>
                     )
                 )}
             </div>
-            <div style={props.styles.submitButtonContainer}>
-                <input type="submit" value={props.submitButton.label} style={props.styles.submitButton} />
+            <div style={submitButtonContainerStyle}>
+                <input type="submit" value={props.submitButton.label} onClick={() => handleSubmit()} style={submitButtonStyle} />
             </div>
-            <div dangerouslySetInnerHTML={{__html: props.extra}} style={props.styles.extra} />
+            <div dangerouslySetInnerHTML={{__html: props.extra}} style={extraStyle} />
         </div>
     );
 }
@@ -137,41 +200,30 @@ Form.defaultProps = {
     extra: "<p>Not registered yet? Register <a href=''>here.</a></p>",
     styles: {
         form: {
-            boxShadow: "0px 0px 5px 2px lightgray",
-            backgroundColor: "transparent",
-            borderStyle: "solid",
-            borderWidth: "1px",
-            borderColor: "black",
-            width: "250px",
-            fontFamily: "Inter, Consolas",
+            
         },
         inputContainer: {
-            width: "80%",
-            gap: "10px",
+            
         },
         inputBox: {
-            borderStyle: "solid",
-            borderColor: "black",
-            borderWidth: "1px",
-            borderRadius: "5px"
+            
         },
         inputLabel: {
-            textAlign: "left",
+            
+        },
+        checkbox: {
+            
         },
         submitButtonContainer: {
-            width: "80%",
-            display: "flex",
-            justifyContent: "center"
+            
         },
         submitButton: {
-            backgroundColor: "#f2f3f3",
-            borderWidth: "0"
+            
         },
         extra: {
-            textAlign: "center",
-            width: "80%"
+            
         }
-    },
+    }
 };
 
 export default Form;

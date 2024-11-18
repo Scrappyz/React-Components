@@ -22,10 +22,12 @@ const PasswordField = memo(({ field, inputStyle, inputTextStyle, inputBoxStyle }
                 placeholder={field.placeholder}
                 style={inputBoxStyle}
             />
-            <div>
-                <input type="checkbox" onClick={togglePasswordVisibility} />
-                <label>{field.showPasswordText || "Show Password"}</label>
-            </div>
+            {(field.showPasswordText !== null && "showPasswordText" in field) && field.showPasswordText.length  && (
+                <div>
+                    <input type="checkbox" onClick={togglePasswordVisibility} />
+                    <label>{field.showPasswordText}</label>
+                </div>
+            )}
         </div>
     );
 });
@@ -116,7 +118,7 @@ Form.defaultProps = {
             placeholder: "Password",
             type: "password",
             showPasswordText: "Show Password",
-        },
+        }
     ],
     onSubmit: null,
     styles: {

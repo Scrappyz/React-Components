@@ -62,6 +62,12 @@ function Form(props) {
         marginBottom: "3px",
     };
 
+    const inputBoxStyle = {
+        ...props.styles.inputBox,
+        height: "20px",
+        width: "97%"
+    }
+
     return (
         <div style={formStyle}>
             {props.title !== null && <p>{props.title}</p>}
@@ -73,7 +79,7 @@ function Form(props) {
                             field={field}
                             inputStyle={inputStyle}
                             inputLabelStyle={inputLabelStyle}
-                            inputBoxStyle={props.styles.inputBox}
+                            inputBoxStyle={inputBoxStyle}
                         />
                     ) : (
                         <div style={inputStyle} key={field.id}>
@@ -86,16 +92,16 @@ function Form(props) {
                                 id={field.id}
                                 type={field.type}
                                 placeholder={field.placeholder}
-                                style={props.styles.inputBox}
+                                style={inputBoxStyle}
                             />
                         </div>
                     )
                 )}
             </div>
-            <div>
-                <input type="submit" value={props.submitButton.label} />
+            <div style={props.styles.submitButtonContainer}>
+                <input type="submit" value={props.submitButton.label} style={props.styles.submitButton} />
             </div>
-            <p>Not registered yet? Register <a href="">here.</a></p>
+            <div dangerouslySetInnerHTML={{__html: props.extra}} style={props.styles.extra} />
         </div>
     );
 }
@@ -128,6 +134,7 @@ Form.defaultProps = {
         label: "Submit",
         onSubmit: null
     },
+    extra: "<p>Not registered yet? Register <a href=''>here.</a></p>",
     styles: {
         form: {
             boxShadow: "0px 0px 5px 2px lightgray",
@@ -143,18 +150,26 @@ Form.defaultProps = {
             gap: "10px",
         },
         inputBox: {
-            height: "20px",
             borderStyle: "solid",
             borderColor: "black",
             borderWidth: "1px",
-            borderRadius: "5px",
-            width: "97%",
+            borderRadius: "5px"
         },
         inputLabel: {
             textAlign: "left",
         },
+        submitButtonContainer: {
+            width: "80%",
+            display: "flex",
+            justifyContent: "center"
+        },
         submitButton: {
-
+            backgroundColor: "#f2f3f3",
+            borderWidth: "0"
+        },
+        extra: {
+            textAlign: "center",
+            width: "80%"
         }
     },
 };

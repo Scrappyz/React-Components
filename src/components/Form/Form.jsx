@@ -2,7 +2,7 @@ import React, { useState, memo } from "react";
 import PropTypes from "prop-types";
 
 // Password Field Component
-const PasswordField = memo(({ field, inputStyle, inputTextStyle, inputBoxStyle }) => {
+const PasswordField = memo(({ field, inputStyle, inputLabelStyle, inputBoxStyle }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -12,7 +12,7 @@ const PasswordField = memo(({ field, inputStyle, inputTextStyle, inputBoxStyle }
     return (
         <div style={inputStyle}>
             {field.label !== null && (
-                <label htmlFor={field.id} style={inputTextStyle}>
+                <label htmlFor={field.id} style={inputLabelStyle}>
                     {field.label}
                 </label>
             )}
@@ -56,8 +56,8 @@ function Form(props) {
         padding: "0px",
     };
 
-    const inputTextStyle = {
-        ...props.styles.inputText,
+    const inputLabelStyle = {
+        ...props.styles.inputLabel,
         margin: "0",
         marginBottom: "3px",
     };
@@ -72,13 +72,13 @@ function Form(props) {
                             key={field.id}
                             field={field}
                             inputStyle={inputStyle}
-                            inputTextStyle={inputTextStyle}
+                            inputLabelStyle={inputLabelStyle}
                             inputBoxStyle={props.styles.inputBox}
                         />
                     ) : (
                         <div style={inputStyle} key={field.id}>
                             {field.label !== null && (
-                                <label htmlFor={field.id} style={inputTextStyle}>
+                                <label htmlFor={field.id} style={inputLabelStyle}>
                                     {field.label}
                                 </label>
                             )}
@@ -92,6 +92,10 @@ function Form(props) {
                     )
                 )}
             </div>
+            <div>
+                <input type="submit" value={props.submitButton.label} />
+            </div>
+            <p>Not registered yet? Register <a href="">here.</a></p>
         </div>
     );
 }
@@ -99,7 +103,7 @@ function Form(props) {
 Form.propTypes = {
     title: PropTypes.string,
     fields: PropTypes.array,
-    onSubmit: PropTypes.func,
+    submitButton: PropTypes.object,
     styles: PropTypes.object,
 };
 
@@ -120,7 +124,10 @@ Form.defaultProps = {
             showPasswordText: "Show Password",
         }
     ],
-    onSubmit: null,
+    submitButton: {
+        label: "Submit",
+        onSubmit: null
+    },
     styles: {
         form: {
             boxShadow: "0px 0px 5px 2px lightgray",
@@ -143,9 +150,12 @@ Form.defaultProps = {
             borderRadius: "5px",
             width: "97%",
         },
-        inputText: {
+        inputLabel: {
             textAlign: "left",
         },
+        submitButton: {
+
+        }
     },
 };
 

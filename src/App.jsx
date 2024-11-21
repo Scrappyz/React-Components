@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div style={frameStyle}>
-      <Form title={"Login"} fields={fields} submitButton={{label: "Submit", onSubmit: getInputs}} />
+      <Form title={"Login"} fields={fields} submitButton={{label: "Submit", onClick: getInputs}} />
     </div>
   )
 }

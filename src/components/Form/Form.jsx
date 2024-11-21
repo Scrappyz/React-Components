@@ -125,7 +125,7 @@ function Form(props) {
             }
         });
 
-        props.submitButton.onSubmit(inputValues);
+        props.submitButton.onClick(inputValues);
     }
 
     return (
@@ -195,7 +195,7 @@ Form.defaultProps = {
     ],
     submitButton: {
         label: "Submit",
-        onSubmit: null
+        onClick: null
     },
     extra: "<p>Not registered yet? Register <a href=''>here.</a></p>",
     styles: {

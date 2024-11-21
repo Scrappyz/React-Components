@@ -12,7 +12,7 @@ A react component for login/register forms.
   - `showPasswordText`: The text to appear next to the checkbox on password types. (If empty, no checkbox will appear)
 - `submitButton`: The submit button of the form.
   - `label`: The text inside the button.
-  - `onSubmit`: A callback function to retrieve input values.
+  - `onClick`: A callback function when the submit button is clicked. Callback function should have one parameter   to store the inputs in. (e.g. `const funcName = (inputs) => {}`)
 - `extra`: Extra text to appear under the submit button.
 - `styles`: The style of the component. 
 

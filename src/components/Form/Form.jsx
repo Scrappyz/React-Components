@@ -36,13 +36,12 @@ const PasswordField = memo(({ field, inputStyle, inputLabelStyle, inputBoxStyle,
 // Main Form Component
 function Form(props) {
     const formStyle = {
-        boxShadow: "0px 0px 5px 2px lightgray",
         backgroundColor: "transparent",
         borderStyle: "solid",
         borderWidth: "1px",
         borderColor: "black",
+        fontFamily: "Arial",
         width: "250px",
-        fontFamily: "Inter, Consolas",
         ...props.styles.form,
         display: "flex",
         flexDirection: "column",
@@ -53,17 +52,17 @@ function Form(props) {
 
     const inputContainerStyle = {
         width: "80%",
-        gap: "10px",
+        gap: "10px 0px",
         ...props.styles.inputContainer,
         display: "flex",
         flexDirection: "column",
+        justifyContent: "center"
     };
 
     const inputStyle = {
         display: "flex",
         flexDirection: "column",
-        margin: "0px",
-        padding: "0px",
+        width: "100%"
     };
 
     const inputLabelStyle = {
@@ -79,8 +78,8 @@ function Form(props) {
         borderWidth: "1px",
         borderRadius: "5px",
         height: "20px",
-        ...props.styles.inputBox,
-        width: "97%"
+        width: "100%",
+        ...props.styles.inputBox
     }
 
     const checkboxStyle = {
@@ -130,7 +129,7 @@ function Form(props) {
 
     return (
         <div style={formStyle}>
-            {props.title !== null && <p>{props.title}</p>}
+            {props.title !== null && <p style={props.styles.title}>{props.title}</p>}
             <div style={inputContainerStyle}>
                 {props.fields.map((field) =>
                     field.type === "password" ? (
@@ -201,6 +200,9 @@ Form.defaultProps = {
     styles: {
         form: {
             
+        },
+        title: {
+
         },
         inputContainer: {
             

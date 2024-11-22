@@ -9,6 +9,32 @@ function App() {
     alignItems: "center"
   }
 
+  const styles = {
+    form: {
+      boxShadow: "0px 5px 10px 1px lightgray",
+      borderWidth: "1px",
+      borderColor: "lightgray",
+      borderRadius: "10px",
+      width: "300px"
+    },
+    title: {
+      fontWeight: "bold",
+      fontSize: "20px",
+      marginBottom: "10px"
+    },
+    inputBox: {
+      height: "30px",
+      borderColor: "lightgray",
+      borderWidth: "1px",
+      paddingLeft: "10px"
+    },
+    submitButton: {
+      height: "30px",
+      backgroundColor: "#dedede",
+      borderWidth: "0px"
+    }
+  }
+
   const fields = [
     {
       id: "user",

@@ -14,7 +14,16 @@ A react component for login/register forms.
   - `label`: The text inside the button.
   - `onClick`: A callback function when the submit button is clicked. Callback function should have one parameter   to store the inputs in. (e.g. `const funcName = (inputs) => {}`)
 - `extra`: Extra text to appear under the submit button.
-- `styles`: The style of the component. 
+- `styles`: The style of the component. Each key corresponds to a part of the form.
+  - `forms`
+  - `title`
+  - `inputContainer`
+  - `inputBox`
+  - `inputLabel`
+  - `checkbox`
+  - `submitButtonContainer`
+  - `submitButton`
+  - `extra`
 
 ### Prop Layout
 ```
@@ -43,6 +52,9 @@ Form.defaultProps = {
     styles: {
         form: {
             
+        },
+        title: {
+
         },
         inputContainer: {
             

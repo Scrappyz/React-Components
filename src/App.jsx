@@ -24,6 +24,7 @@ function App() {
     },
     inputBox: {
       height: "30px",
+      width: "94%",
       borderColor: "lightgray",
       borderWidth: "1px",
       paddingLeft: "10px"
@@ -38,13 +39,11 @@ function App() {
   const fields = [
     {
       id: "user",
-      label: "Username",
       placeholder: "Username",
       type: "text"
     },
     {
       id: "pw",
-      label: "Password",
       placeholder: "Password",
       type: "password",
       showPasswordText: "Show Password"
@@ -60,7 +59,7 @@ function App() {
 
   return (
     <div style={frameStyle}>
-      <Form title={"Login"} fields={fields} submitButton={{label: "Submit", onClick: getInputs}} />
+      <Form title={"Login"} fields={fields} submitButton={{label: "Submit", onClick: getInputs}} styles={styles} />
     </div>
   )
 }

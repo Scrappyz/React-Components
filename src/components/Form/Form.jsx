@@ -40,7 +40,7 @@ function Form(props) {
         borderStyle: "solid",
         borderWidth: "1px",
         borderColor: "black",
-        fontFamily: "Arial",
+        fontFamily: "Inter, Arial",
         width: "250px",
         ...props.styles.form,
         display: "flex",
@@ -67,6 +67,7 @@ function Form(props) {
 
     const inputLabelStyle = {
         textAlign: "left",
+        fontSize: "1em",
         ...props.styles.inputLabel,
         margin: "0",
         marginBottom: "3px",

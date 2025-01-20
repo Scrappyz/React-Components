@@ -3,7 +3,6 @@ A react component for login/register forms.
 
 ## Props
 - `title`: The title of the form. This is what will appear on the top of the form.
-  - Type: `string`
 - `fields`: This are the input fields of the form. The form will expand dynamically.
   - `id`: The `id` of the input to be used when retrieving.
   - `label`: Label of the field. (Can be omitted)
@@ -12,7 +11,7 @@ A react component for login/register forms.
   - `showPasswordText`: The text to appear next to the checkbox on password types. (If empty, no checkbox will appear)
 - `submitButton`: The submit button of the form.
   - `label`: The text inside the button.
-  - `onClick`: A callback function when the submit button is clicked. Callback function should have one parameter   to store the inputs in. (e.g. `const funcName = (inputs) => {}`)
+  - `onSubmit`: A callback function when the submit function is invoked. Callback function should have one parameter to store the inputs in. (e.g. `const funcName = (inputs) => {}`)
 - `extra`: Extra text to appear under the submit button.
 - `styles`: The style of the component. Each key corresponds to a part of the form.
   - `forms`
